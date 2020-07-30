@@ -1,0 +1,95 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run: 
+          name: Installing dependencies
+          command: yarn install
+      - run: 
+          name: Running eslint
+          command: yarn run lint
+  build-qa-somecustomer:
+    docker:
+      - image: circleci/node:8
+    environment:
+      - REACT_APP_ENV: "qa"
+      - REACT_APP_ANALYTICS_TRACKING_ID: "YourAnalyticsTrackingID"
+    steps:
+      - checkout
+      - run: sudo apt install python-pip python-dev
+      - run: sudo pip install awscli
+      - run: aws configure set aws_access_key_id AKIAJMTZW45LP4NKYHDA
+      - run: aws configure set aws_secret_access_key $AWS_DEV_SECRET_ACCESS_KEY
+      - run: aws configure set default.region us-east-1
+      - run: 
+          name: Installing dependencies
+          command: yarn install
+      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_QA_TOKEN yarn build someCustomer qa
+      - run: aws s3 sync --delete build/ s3://your-bucket-here
+      - run: aws configure set preview.cloudfront true
+      - run: aws cloudfront create-invalidation --distribution-id your-cloudfront-distribution-id --paths '/*'
+      - run:
+          name: Deployment notification to Rollbar
+          command: |
+            curl https://api.rollbar.com/api/1/deploy/ \
+            -F access_token=$ROLLBAR_QA_SERVER_TOKEN \
+            -F environment=somecustomer \
+            -F revision=$CIRCLE_SHA1 \
+            -F local_username=$CIRCLE_USERNAME
+  build-prod-somecustomer:
+    docker:
+      - image: circleci/node:8
+    environment:
+      - REACT_APP_ENV: "prod"
+      - REACT_APP_ANALYTICS_TRACKING_ID: "YourAnalyticsTrackingID"
+    steps:
+      - checkout
+      - run: sudo apt install python-pip python-dev
+      - run: sudo pip install awscli
+      - run: aws configure set aws_access_key_id AKIAIQ6TKRKZ6CFAA2RQ
+      - run: aws configure set aws_secret_access_key $AWS_PROD_SECRET_ACCESS_KEY
+      - run: aws configure set default.region us-east-1
+      - run: 
+          name: Installing dependencies
+          command: yarn install
+      - run: CI=false REACT_APP_ROLLBAR_TOKEN=$REACT_APP_ROLLBAR_PROD_TOKEN yarn build someCustomer prod
+      - run: aws s3 sync --delete build/ s3://your-production-bucket-here
+      - run: aws configure set preview.cloudfront true
+      - run: aws cloudfront create-invalidation --distribution-id your-production-cloudfront-distribution-id --paths '/*'
+      - run:
+          name: Deployment notification to Rollbar
+          command: |
+            curl https://api.rollbar.com/api/1/deploy/ \
+            -F access_token=$ROLLBAR_PROD_SERVER_TOKEN \
+            -F environment=somecustomer \
+            -F revision=$CIRCLE_SHA1 \
+            -F local_username=$CIRCLE_USERNAME
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test
+      - approval-somecustomer:
+          type: approval
+          requires: 
+            - test
+          filters:
+            branches:
+              only: 
+                - qa
+                - master
+      - build-qa-somecustomer:
+          requires:
+            - approval-somecustomer
+          filters:
+            branches:
+              only: qa
+      - build-prod-somecustomer:
+          requires:
+            - approval-somecustomer
+          filters:
+            branches:
+              only: master
