@@ -1,11 +1,5 @@
-export const categories = {
-  PERSONAJES: 'Personajes'
-};
+export const categories = {};
 
-export const actions = {
-  RECUPERAR_PERSONAJES: 'Se solicito recuperar personajes'
-};
+export const actions = {};
 
-export const labels = {
-  RECUPERAR_PERSONAJES_OK: 'Se recuperaron correctamente los personajes'
-};
+export const labels = {};
