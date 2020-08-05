@@ -1,4 +1,48 @@
+@import 'scss/variables/_mediaQueries.scss';
 .container {
-  height: 100%;
-  width: 100%;
+  @media #{$desktop} {
+    width: 500px;
+    height: 500px;
+    border-radius: 50px;
+    transform: translate(50%, 30%);
+    background-color: rgba(241, 135, 48, 0.8);
+  }
+  @media #{$tablet} {
+    width: 500px;
+    height: 500px;
+    border-radius: 50px;
+    transform: translate(30%, 30%);
+    background-color: rgba(241, 135, 48, 0.8);
+  }
+  @media #{$mobile} {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    background-color: rgba(241, 135, 48, 0.8);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.input {
+  height: 20%;
+  background-color: rgba(110, 110, 110, 1);
+  padding: 30px 85px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.buttons {
+  @media #{$desktop, $tablet} {
+    padding: 15px 130px;
+  }
+  @media #{$mobile} {
+    width: 500px;
+  }
+  @media #{$small-mobile} {
+    width: 500px;
+    padding: 0px 10px;
+  }
 }

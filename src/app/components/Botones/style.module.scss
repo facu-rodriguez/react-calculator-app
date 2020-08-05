@@ -1,0 +1,185 @@
+@import 'scss/variables/_mediaQueries.scss';
+
+%boton {
+  @media #{$desktop}, #{$tablet} {
+    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+    border: transparent;
+    color: white;
+    font-size: 30px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+  }
+  @media #{$mobile} {
+    border-radius: 15px;
+    width: 100px;
+    height: 100px;
+    border: transparent;
+    color: white;
+    font-size: 50px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+  }
+
+  @media #{$small-mobile} {
+    border-radius: 40px;
+    width: 80px;
+    height: 80px;
+    border: transparent;
+    color: white;
+    font-size: 50px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+  }
+}
+
+%botonesLargos {
+  @media #{$desktop}, #{$tablet} {
+    border-radius: 15px;
+    height: 50px;
+    border: transparent;
+    color: white;
+    font-size: 30px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+  }
+  @media #{$mobile} {
+    border-radius: 15px;
+    height: 100px;
+    border: transparent;
+    color: white;
+    font-size: 50px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+  }
+  @media #{$small-mobile} {
+    border-radius: 30px;
+    height: 100px;
+  }
+}
+
+%activeProperties {
+  box-shadow: 0px 0px;
+  border: transparent;
+}
+
+.borrarTodo {
+  @extend %botonesLargos;
+  @media #{$desktop}, #{$tablet} {
+    width: 105px;
+    background-color: #ff8200;
+    margin: 5px 50px 5px 10px;
+    float: right;
+  }
+  @media #{$mobile} {
+    width: 200px;
+    background-color: #ff8200;
+    margin: 5px 90px 5px 10px;
+    float: right;
+  }
+  @media #{$small-mobile} {
+    width: 150px;
+    background-color: #ff8200;
+    margin: 5px 50px 5px 10px;
+    float: right;
+  }
+}
+//@media #{$desktop}, #{$tablet} {}
+//@media #{$mobile} {}
+
+.borrarTodo:active {
+  @extend %activeProperties;
+  margin: 8px 90px 0px 10px;
+}
+
+.borrar {
+  @extend %botonesLargos;
+  @media #{$desktop}, #{$tablet} {
+    width: 70px;
+    background-color: #ff8200;
+    margin: 5px 0px 5px 0px;
+    float: right;
+  }
+  @media #{$mobile} {
+    width: 200px;
+    background-color: #ff8200;
+    margin: 5px 0px 5px 0px;
+    float: right;
+  }
+  @media #{$small-mobile} {
+    width: 150px;
+    background-color: #ff8200;
+    margin: 5px 0px 5px 0px;
+    float: right;
+  }
+}
+
+.borrar:active {
+  @extend %activeProperties;
+  margin: 7px 0px 3px 0px;
+}
+
+.number {
+  @extend %boton;
+  @media #{$desktop}, #{$tablet} {
+  }
+  @media #{$mobile} {
+  }
+  @media #{$small-mobile} {
+  }
+  margin: 10px 5px 0px;
+  background-color: orange;
+}
+
+.number:active {
+  @extend %activeProperties;
+  margin: 11px 5px 0px;
+}
+
+.operador {
+  @extend %boton;
+  margin: 9px 0px 0px 10px;
+  background-color: #989694;
+  float: right;
+}
+
+.operador:active {
+  @extend %activeProperties;
+  margin: 10px 0px 0px;
+}
+
+.cero {
+  @extend %botonesLargos;
+  @media #{$desktop}, #{$tablet} {
+    width: 110px;
+    margin: 5px 5px;
+    background-color: orange;
+  }
+  @media #{$mobile} {
+    width: 200px;
+    margin: 5px 5px;
+    background-color: orange;
+  }
+  @media #{$small-mobile} {
+    width: 150px;
+    margin: 5px 5px;
+    background-color: orange;
+  }
+}
+
+.cero:active {
+  @extend %activeProperties;
+  margin: 6px 5px 1px;
+}
+
+.igual {
+  @extend %boton;
+  margin: 5px 5px;
+  background-color: green;
+}
+
+.igual:active {
+  @extend %activeProperties;
+  margin: 6px 5px 1px;
+}
