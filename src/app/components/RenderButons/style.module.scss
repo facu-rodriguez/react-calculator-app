@@ -3,8 +3,9 @@
 %boton {
   @media #{$desktop}, #{$tablet} {
     border-radius: 15px;
-    width: 50px;
-    height: 50px;
+    padding: 3% 0;
+    margin: 5% 5px 1%;
+    width: 20%;
     border: transparent;
     color: white;
     font-size: 30px;
@@ -13,19 +14,9 @@
   }
   @media #{$mobile} {
     border-radius: 15px;
-    width: 100px;
-    height: 100px;
-    border: transparent;
-    color: white;
-    font-size: 50px;
-    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
-    outline: none;
-  }
-
-  @media #{$small-mobile} {
-    border-radius: 40px;
-    width: 80px;
-    height: 80px;
+    padding: 0.5% 0.5%;
+    margin: 2% 5px 1%;
+    width: 20%;
     border: transparent;
     color: white;
     font-size: 50px;
@@ -37,7 +28,7 @@
 %botonesLargos {
   @media #{$desktop}, #{$tablet} {
     border-radius: 15px;
-    height: 50px;
+    padding: 3% 0%;
     border: transparent;
     color: white;
     font-size: 30px;
@@ -46,16 +37,12 @@
   }
   @media #{$mobile} {
     border-radius: 15px;
-    height: 100px;
+    padding: 1% 0;
     border: transparent;
     color: white;
     font-size: 50px;
     box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
     outline: none;
-  }
-  @media #{$small-mobile} {
-    border-radius: 30px;
-    height: 100px;
   }
 }
 
@@ -64,122 +51,107 @@
   border: transparent;
 }
 
-.borrarTodo {
+.deleteAll {
   @extend %botonesLargos;
   @media #{$desktop}, #{$tablet} {
-    width: 105px;
+    width: 35%;
     background-color: #ff8200;
-    margin: 5px 50px 5px 10px;
+    margin: 5px 15% 5px 5%;
     float: right;
   }
   @media #{$mobile} {
-    width: 200px;
+    width: 40%;
     background-color: #ff8200;
-    margin: 5px 90px 5px 10px;
-    float: right;
-  }
-  @media #{$small-mobile} {
-    width: 150px;
-    background-color: #ff8200;
-    margin: 5px 50px 5px 10px;
+    margin: 5px 20% 5px 10%;
     float: right;
   }
 }
-//@media #{$desktop}, #{$tablet} {}
-//@media #{$mobile} {}
 
-.borrarTodo:active {
+.deleteAll:active {
   @extend %activeProperties;
-  margin: 8px 90px 0px 10px;
+  margin: 6px 15% 0px 5%;
+  @media #{$mobile} {
+    margin: 6px 20% 0px 10%;
+  }
 }
 
-.borrar {
+.delete {
   @extend %botonesLargos;
   @media #{$desktop}, #{$tablet} {
-    width: 70px;
+    width: 25%;
     background-color: #ff8200;
     margin: 5px 0px 5px 0px;
     float: right;
   }
   @media #{$mobile} {
-    width: 200px;
+    width: 30%;
     background-color: #ff8200;
-    margin: 5px 0px 5px 0px;
-    float: right;
-  }
-  @media #{$small-mobile} {
-    width: 150px;
-    background-color: #ff8200;
-    margin: 5px 0px 5px 0px;
+    margin: 5px 0px;
     float: right;
   }
 }
 
-.borrar:active {
+.delete:active {
   @extend %activeProperties;
   margin: 7px 0px 3px 0px;
 }
 
 .number {
   @extend %boton;
-  @media #{$desktop}, #{$tablet} {
-  }
-  @media #{$mobile} {
-  }
-  @media #{$small-mobile} {
-  }
-  margin: 10px 5px 0px;
   background-color: orange;
 }
 
 .number:active {
   @extend %activeProperties;
-  margin: 11px 5px 0px;
+  margin: 5% 5px 1%;
+  @media #{$mobile} {
+    margin: 2.3% 5px 0%;
+  }
 }
 
 .operador {
   @extend %boton;
-  margin: 9px 0px 0px 10px;
   background-color: #989694;
   float: right;
 }
 
 .operador:active {
   @extend %activeProperties;
-  margin: 10px 0px 0px;
+  margin: 5.5% 5px 0px;
+  @media #{$mobile} {
+    margin: 2.5% 5px 0px;
+  }
 }
 
 .cero {
   @extend %botonesLargos;
   @media #{$desktop}, #{$tablet} {
-    width: 110px;
-    margin: 5px 5px;
+    width: 35%;
+    margin: 5% 10% 5% 0%;
     background-color: orange;
   }
   @media #{$mobile} {
-    width: 200px;
-    margin: 5px 5px;
-    background-color: orange;
-  }
-  @media #{$small-mobile} {
-    width: 150px;
-    margin: 5px 5px;
+    width: 40%;
+    margin: 2% 5px 1%;
     background-color: orange;
   }
 }
 
 .cero:active {
   @extend %activeProperties;
-  margin: 6px 5px 1px;
+  margin: 5.5% 10% 0 0;
+  @media #{$mobile} {
+    margin: 2.5% 5px 0%;
+  }
 }
 
 .igual {
   @extend %boton;
-  margin: 5px 5px;
+  margin: 2% 5px 1%;
   background-color: green;
 }
 
 .igual:active {
   @extend %activeProperties;
-  margin: 6px 5px 1px;
+  margin: 3% 5px 0%;
 }

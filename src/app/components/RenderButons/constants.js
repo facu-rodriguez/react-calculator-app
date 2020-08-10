@@ -1,11 +1,8 @@
-import React, { PureComponent } from 'react';
-
-import Button from '../Buton';
 import styles from './style.module.scss';
 
-const Calculadora = [
-  { className: styles.borrarTodo, value: 'C', text: 'C' },
-  { className: styles.borrar, value: 'borrar', text: '<-' },
+export const BUTTONS_CONFIG = [
+  { className: styles.deleteAll, value: 'C', text: 'C' },
+  { className: styles.delete, value: 'delete', text: '<-' },
   { className: styles.number, value: 7, text: 7 },
   { className: styles.number, value: 8, text: 8 },
   { className: styles.number, value: 9, text: 9 },
@@ -22,17 +19,3 @@ const Calculadora = [
   { className: styles.igual, value: '=', text: '=' },
   { className: styles.operador, value: '/', text: '%' }
 ];
-
-class Botones extends PureComponent {
-  setButtonValues = () =>
-    Calculadora.map(i => (
-      <Button className={i.className} value={i.value} handleClick={this.props.handleClick} text={i.text} />
-    ));
-
-  render() {
-    console.log(this);
-    return this.setButtonValues();
-  }
-}
-
-export default Botones;

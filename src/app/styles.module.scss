@@ -1,17 +1,21 @@
 @import 'scss/variables/_mediaQueries.scss';
 .container {
   @media #{$desktop} {
-    width: 500px;
-    height: 500px;
+    width: 50%;
+    height: 100%;
     border-radius: 50px;
-    transform: translate(50%, 30%);
     background-color: rgba(241, 135, 48, 0.8);
   }
-  @media #{$tablet} {
-    width: 500px;
-    height: 500px;
+  @media #{$tablet-landscape} {
+    width: 55%;
+    height: 100%;
     border-radius: 50px;
-    transform: translate(30%, 30%);
+    background-color: rgba(241, 135, 48, 0.8);
+  }
+  @media #{$tablet-portrait} {
+    width: 70%;
+    height: 75%;
+    border-radius: 50px;
     background-color: rgba(241, 135, 48, 0.8);
   }
   @media #{$mobile} {
@@ -29,20 +33,16 @@
 .input {
   height: 20%;
   background-color: rgba(110, 110, 110, 1);
-  padding: 30px 85px;
+  padding: 3% 15%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .buttons {
   @media #{$desktop, $tablet} {
-    padding: 15px 130px;
+    padding: 5% 25%;
   }
   @media #{$mobile} {
-    width: 500px;
-  }
-  @media #{$small-mobile} {
-    width: 500px;
-    padding: 0px 10px;
+    padding: 1% 15%;
   }
 }

@@ -1,6 +1,8 @@
-$small-mobile: 'only screen and (max-width : 500px)'; //cambie 361px por 500px
+$small-mobile: 'only screen and (max-width : 316px)';
 $mobile: 'only screen and (max-width : 767px)';
 $tablet-mobile: 'only screen and (max-width : 1024px)';
+$tablet-landscape: 'only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : landscape)';
+$tablet-portrait: 'only screen and (min-width : 768px) and (max-width : 1024px) and (orientation : portrait)';
 $tablet: 'only screen and (min-width : 768px) and (max-width : 1024px)';
 $desktop-tablet: 'only screen and (min-width : 768px)';
 $desktop: 'only screen and (min-width : 1025px)';
