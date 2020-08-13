@@ -5,6 +5,8 @@ import 'url-search-params-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from 'redux/store';
 import { StylesProvider } from '@material-ui/styles';
 
 import './scss/index.scss';
@@ -20,7 +22,9 @@ unregister();
 
 ReactDOM.render(
   <StylesProvider injectFirst>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StylesProvider>,
   document.getElementById('root')
 );

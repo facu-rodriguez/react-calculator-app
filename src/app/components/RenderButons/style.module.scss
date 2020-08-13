@@ -103,7 +103,7 @@
 
 .number:active {
   @extend %activeProperties;
-  margin: 5% 5px 1%;
+  margin: 5.5% 5px 1%;
   @media #{$mobile} {
     margin: 2.3% 5px 0%;
   }
@@ -139,7 +139,7 @@
 
 .cero:active {
   @extend %activeProperties;
-  margin: 5.5% 10% 0 0;
+  margin: 5.5% 10% 5% 0;
   @media #{$mobile} {
     margin: 2.5% 5px 0%;
   }
@@ -153,5 +153,5 @@
 
 .igual:active {
   @extend %activeProperties;
-  margin: 3% 5px 0%;
+  margin: 5.5% 5px 0%;
 }

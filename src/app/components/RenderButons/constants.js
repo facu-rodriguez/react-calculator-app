@@ -17,5 +17,9 @@ export const BUTTONS_CONFIG = [
   { className: styles.operador, value: '*', text: 'x' },
   { className: styles.cero, value: 0, text: 0 },
   { className: styles.igual, value: '=', text: '=' },
-  { className: styles.operador, value: '/', text: '%' }
+  { className: styles.operador, value: '/', text: '%' },
+  { className: styles.save, value: 'save', text: 'save' },
+  { className: styles.save, value: 'deleteAllTrace', text: 'Delete All' },
+  { className: styles.save, value: 'deleteSomeTrace', text: 'Delete' },
+  { className: styles.save, value: 'editExpression', text: 'Change Expression' }
 ];

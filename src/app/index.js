@@ -1,92 +1,132 @@
 import React, { PureComponent } from 'react';
+import store from 'redux/store';
+import {
+  saveExpressionAction,
+  deleteAllExpressionAction,
+  deleteSomeExpressionAction,
+  editExpressionAction
+} from 'redux/traceExpression/actions';
+import { connect } from 'react-redux';
 
 import ButonsConfig from 'app/components/RenderButons';
 import Input from 'app/components/Input';
+import Trace from 'app/components/Trace';
 
 import styles from './styles.module.scss';
+import { defaultState } from 'redux/traceExpression/reducer';
 
 class AppContainer extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { expresion: '', operacion: '', primerExpresion: 0 };
+    this.state = { expression: '', operacion: '', firstExpression: '', newExpression: '' };
   }
+  selectedTraceExpression = 0;
+  selectedTraceIndex = 0;
+  modifyExpression = 0;
+
+  handleClickTrace = (expression, index, modifyExpression) => {
+    return (
+      (this.selectedTraceExpression = expression),
+      (this.selectedTraceIndex = index),
+      (modifyExpression = this.state.newExpression)
+    );
+  };
 
   handleClick = value => {
+    console.log(value);
     switch (value) {
       case '+':
       case '-':
       case '*':
       case '/':
         this.setState(prevState => {
-          const primerValor = parseInt(prevState.primerExpresion);
-          const segundoValor = parseInt(prevState.expresion);
-          let resultado = '';
           switch (prevState.operacion) {
             case '+':
-              resultado = primerValor + segundoValor;
-              return { expresion: resultado, operacion: '' };
-              break;
             case '-':
-              resultado = primerValor - segundoValor;
-              return { expresion: resultado, operacion: '' };
-              break;
             case '*':
-              resultado = primerValor * segundoValor;
-              return { expresion: resultado, operacion: '' };
-              break;
             case '/':
-              resultado = primerValor / segundoValor;
-              return { expresion: resultado, operacion: '' };
+              return {
+                firstExpression: this.firstExpression + ' ' + value + ' ' + this.state.expression,
+                newExpression: this.firstExpression
+              };
               break;
+
             default:
               return {
-                primerExpresion: prevState.expresion,
+                firstExpression: prevState.expression,
+                newExpression: prevState.firstExpression,
                 operacion: value,
-                expresion: ''
+                expression: ''
               };
           }
         });
         break;
       case '=':
         this.setState(prevState => {
-          const primerValor = parseInt(prevState.primerExpresion);
-          const segundoValor = parseInt(prevState.expresion);
+          const primerValor = eval(prevState.firstExpression);
+          const segundoValor = eval(prevState.expression);
           let resultado = '';
           switch (prevState.operacion) {
             case '+':
               resultado = primerValor + segundoValor;
-              return { expresion: resultado, operacion: '' };
+              return {
+                expression: resultado,
+                operacion: '',
+                firstExpression: '',
+                newExpression: this.expression
+              };
               break;
             case '-':
               resultado = primerValor - segundoValor;
-              return { expresion: resultado, operacion: '' };
+              return { expression: resultado, operacion: '', firstExpression: '' };
               break;
             case '*':
               resultado = primerValor * segundoValor;
-              return { expresion: resultado, operacion: '' };
+              return { expression: resultado, operacion: '', firstExpression: '' };
               break;
             case '/':
               resultado = primerValor / segundoValor;
-              return { expresion: resultado, operacion: '' };
+              return { expression: resultado, operacion: '', firstExpression: '' };
               break;
           }
         });
         break;
       case 'delete':
         this.setState(prevState => ({
-          expresion: prevState.expresion.toString().slice(0, -1)
+          expression: prevState.expression.toString().slice(0, -1)
         }));
         break;
       case 'C':
         this.setState(() => ({
-          expresion: '',
+          expression: '',
           operacion: '',
-          primerExpresion: 0
+          firstExpression: ''
         }));
+        break;
+      case 'save':
+        this.props.dispatch(
+          saveExpressionAction(
+            this.state.firstExpression + ' ' + this.state.operacion + ' ' + this.state.expression
+          )
+        );
+        break;
+      case 'deleteAllTrace':
+        this.props.dispatch(deleteAllExpressionAction(this.state));
+        break;
+      case 'deleteSomeTrace':
+        this.props.dispatch(deleteSomeExpressionAction(this.selectedTraceExpression));
+        break;
+      case 'editExpression':
+        console.log(this.modifyExpression);
+        return this.props.dispatch(editExpressionAction(this.selectedTraceIndex, this.modifyExpression));
+
         break;
       default:
         if (isFinite(value)) {
-          this.setState(prevState => ({ expresion: prevState.expresion + value }));
+          this.setState(prevState => ({
+            expression: prevState.expression + '' + value,
+            newExpression: this.expression
+          }));
         }
     }
   };
@@ -94,15 +134,27 @@ class AppContainer extends PureComponent {
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.input}>
-          <Input value={this.state.expresion} handleClick={this.handleClick} />
+        <div className={styles.containerTrace}>
+          <Trace
+            value={this.state.newExpression}
+            handleClick={this.handleClick}
+            handleClickTrace={this.handleClickTrace}
+          />
         </div>
-        <div className={styles.buttons}>
-          <ButonsConfig handleClick={this.handleClick} />
+        <div className={styles.containerCalculator}>
+          <div className={styles.input}>
+            <Input
+              value={this.state.firstExpression + ' ' + this.state.operacion + ' ' + this.state.expression}
+              handleClick={this.handleClick}
+            />
+          </div>
+          <div className={styles.buttons}>
+            <ButonsConfig handleClick={this.handleClick} />
+          </div>
         </div>
       </div>
     );
   }
 }
 
-export default AppContainer;
+export default connect()(AppContainer);
