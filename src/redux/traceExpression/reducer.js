@@ -15,9 +15,10 @@ export const deleteTrace = state => {
   };
 };
 
-export const deleteSome = (state, expression) => {
+export const deleteSome = (state, expressionId) => {
+  console.log({ expressionId });
   return {
-    traceExpression: [...state.traceExpression.filter(item => item !== expression)]
+    traceExpression: [...state.traceExpression.filter(item => item.id !== expressionId)]
   };
 };
 export const changeExpression = (state, index, newValue) => {

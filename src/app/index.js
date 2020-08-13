@@ -18,15 +18,24 @@ import { defaultState } from 'redux/traceExpression/reducer';
 class AppContainer extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { expression: '', operacion: '', firstExpression: '', newExpression: '' };
+    this.state = {
+      expression: '',
+      operacion: '',
+      firstExpression: '',
+      newExpression: '',
+      idCurrentExpresion: 0,
+      selectedTraceExpressionId: null
+    };
   }
-  selectedTraceExpression = 0;
+
   selectedTraceIndex = 0;
   modifyExpression = 0;
 
-  handleClickTrace = (expression, index, modifyExpression) => {
+  handleClickTrace = (expressionId, index, modifyExpression) => {
+    this.setState(() => ({
+      selectedTraceExpressionId: expressionId
+    }));
     return (
-      (this.selectedTraceExpression = expression),
       (this.selectedTraceIndex = index),
       (modifyExpression = this.state.newExpression)
     );
@@ -104,17 +113,24 @@ class AppContainer extends PureComponent {
         }));
         break;
       case 'save':
-        this.props.dispatch(
-          saveExpressionAction(
-            this.state.firstExpression + ' ' + this.state.operacion + ' ' + this.state.expression
-          )
-        );
+        {
+          const formatExpression =
+            this.state.firstExpression + ' ' + this.state.operacion + ' ' + this.state.expression;
+          this.props.dispatch(
+            saveExpressionAction({ id: this.state.idCurrentExpresion, expression: formatExpression })
+          );
+          this.setState(prevState => ({
+            idCurrentExpresion: prevState.idCurrentExpresion + 1
+          }));
+        }
         break;
       case 'deleteAllTrace':
         this.props.dispatch(deleteAllExpressionAction(this.state));
         break;
-      case 'deleteSomeTrace':
-        this.props.dispatch(deleteSomeExpressionAction(this.selectedTraceExpression));
+      case 'deleteSomeTrace':{
+        console.log({state: this.state.selectedTraceExpressionId})
+        this.props.dispatch(deleteSomeExpressionAction(this.state.selectedTraceExpressionId));
+      }
         break;
       case 'editExpression':
         console.log(this.modifyExpression);
