@@ -33,7 +33,12 @@ class Trace extends PureComponent {
       <div>
         <h1 className={styles.traceTittle}>Trace</h1>
         <div className={styles.traceElementContainer}>
-          <input type="text" value={this.props.value} onKeyDown={this.handleValuePress} />
+          <input
+            className={styles.traceInput}
+            type="text"
+            value={this.props.value}
+            onKeyDown={this.handleValuePress}
+          />
           {this.props.expression.traceExpression.map(objectExpression =>
             this.handleRenderExpression(objectExpression)
           )}

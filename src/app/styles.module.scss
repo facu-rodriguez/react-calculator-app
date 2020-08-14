@@ -1,5 +1,9 @@
 @import 'scss/variables/_mediaQueries.scss';
 
+.container {
+  max-height: 100%;
+}
+
 .containerTrace {
   background-color: rgba(200, 200, 200, 1);
   border-radius: 25px;

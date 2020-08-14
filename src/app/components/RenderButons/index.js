@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 
 import Button from '../Buton';
 
@@ -8,7 +9,13 @@ import styles from './style.module.scss';
 class ButonsConfig extends PureComponent {
   setButtonValues = () =>
     BUTTONS_CONFIG.map(i => (
-      <Button className={i.className} value={i.value} handleClick={this.props.handleClick} text={i.text} />
+      <Button
+        className={i.className}
+        classNameSelect={this.props.trace.length > 0 && i.classNameSelect}
+        value={i.value}
+        handleClick={this.props.handleClick}
+        text={i.text}
+      />
     ));
 
   render() {
@@ -16,4 +23,11 @@ class ButonsConfig extends PureComponent {
   }
 }
 
-export default ButonsConfig;
+const mapStateToProps = store => (
+  console.log(store),
+  {
+    trace: store.traceExpression.traceExpression
+  }
+);
+
+export default connect(mapStateToProps)(ButonsConfig);

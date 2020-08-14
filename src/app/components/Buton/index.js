@@ -9,7 +9,11 @@ class Button extends PureComponent {
 
   render() {
     return (
-      <button className={this.props.className} value={this.props.value} onClick={this.handleValueClick}>
+      <button
+        className={`${this.props.className} ${this.props.classNameSelect || ''}`}
+        value={this.props.value}
+        onClick={this.handleValueClick}
+      >
         {this.props.text}
       </button>
     );

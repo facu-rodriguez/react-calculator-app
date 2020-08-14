@@ -1,6 +1,7 @@
 import styles from './style.module.scss';
 
 export const BUTTONS_CONFIG = [
+  { className: styles.save, value: 'save', text: 'save' },
   { className: styles.deleteAll, value: 'C', text: 'C' },
   { className: styles.delete, value: 'delete', text: '<-' },
   { className: styles.number, value: 7, text: 7 },
@@ -18,8 +19,22 @@ export const BUTTONS_CONFIG = [
   { className: styles.cero, value: 0, text: 0 },
   { className: styles.igual, value: '=', text: '=' },
   { className: styles.operador, value: '/', text: '%' },
-  { className: styles.save, value: 'save', text: 'save' },
-  { className: styles.save, value: 'deleteAllTrace', text: 'Delete All' },
-  { className: styles.save, value: 'deleteSomeTrace', text: 'Delete' },
-  { className: styles.save, value: 'editExpression', text: 'Change Expression' }
+  {
+    className: styles.deleteAllTrace,
+    classNameSelect: styles.activeButtons,
+    value: 'deleteAllTrace',
+    text: 'Delete All'
+  },
+  {
+    className: styles.deleteSomeTrace,
+    classNameSelect: styles.activeButtons,
+    value: 'deleteSomeTrace',
+    text: 'Delete'
+  },
+  {
+    className: styles.editExpression,
+    classNameSelect: styles.activeButtons,
+    value: 'editExpression',
+    text: 'Change Expression'
+  }
 ];

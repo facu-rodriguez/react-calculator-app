@@ -25,6 +25,17 @@
   }
 }
 
+%traceButtons {
+  @extend %boton;
+  @media #{$desktop}, #{$tablet} {
+    opacity: 0.4;
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 15px;
+    width: 30%;
+    padding: 3% 0;
+  }
+}
+
 %botonesLargos {
   @media #{$desktop}, #{$tablet} {
     border-radius: 15px;
@@ -51,12 +62,24 @@
   border: transparent;
 }
 
+.save {
+  @extend %boton;
+  background-color: rgba(96, 133, 235, 0.8);
+  font-size: 20px;
+  margin: 4% 0 5%;
+}
+
+.save:active {
+  @extend %activeProperties;
+  margin: 4.2% 0 5%;
+}
+
 .deleteAll {
   @extend %botonesLargos;
   @media #{$desktop}, #{$tablet} {
     width: 35%;
     background-color: #ff8200;
-    margin: 5px 15% 5px 5%;
+    margin: 5px 5% 5px 5%;
     float: right;
   }
   @media #{$mobile} {
@@ -69,7 +92,7 @@
 
 .deleteAll:active {
   @extend %activeProperties;
-  margin: 6px 15% 0px 5%;
+  margin: 6px 5% 0px 5%;
   @media #{$mobile} {
     margin: 6px 20% 0px 10%;
   }
@@ -147,11 +170,25 @@
 
 .igual {
   @extend %boton;
-  margin: 2% 5px 1%;
-  background-color: green;
+  background-color: rgba(150, 191, 50, 1);
 }
 
 .igual:active {
   @extend %activeProperties;
   margin: 5.5% 5px 0%;
+}
+
+.deleteAllTrace {
+  @extend %traceButtons;
+}
+
+.deleteSomeTrace {
+  @extend %traceButtons;
+}
+.editExpression {
+  @extend %traceButtons;
+}
+
+.activeButtons {
+  opacity: 1;
 }
