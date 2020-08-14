@@ -23,11 +23,8 @@ class ButonsConfig extends PureComponent {
   }
 }
 
-const mapStateToProps = store => (
-  console.log(store),
-  {
-    trace: store.traceExpression.traceExpression
-  }
-);
+const mapStateToProps = store => ({
+  trace: store.traceExpression.traceExpression
+});
 
 export default connect(mapStateToProps)(ButonsConfig);

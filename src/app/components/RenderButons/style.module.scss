@@ -1,5 +1,10 @@
 @import 'scss/variables/_mediaQueries.scss';
 
+%activeProperties {
+  box-shadow: 0px 0px;
+  border: transparent;
+}
+
 %boton {
   @media #{$desktop}, #{$tablet} {
     border-radius: 15px;
@@ -13,14 +18,10 @@
     outline: none;
   }
   @media #{$mobile} {
-    border-radius: 15px;
-    padding: 0.5% 0.5%;
-    margin: 2% 5px 1%;
-    width: 20%;
+    width: 25%;
     border: transparent;
     color: white;
-    font-size: 50px;
-    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    font-size: 30px;
     outline: none;
   }
 }
@@ -33,6 +34,23 @@
     font-size: 15px;
     width: 30%;
     padding: 3% 0;
+  }
+  @media #{$mobile} {
+    opacity: 0.4;
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 16px;
+    width: 33.3%;
+  }
+}
+
+%traceButtons:active {
+  @extend %activeProperties;
+  @media #{$desktop}, #{$tablet} {
+    margin: 6% 5px 5%;
+  }
+  @media #{$mobile} {
+    margin: 0;
+    font-size: 14px;
   }
 }
 
@@ -47,31 +65,36 @@
     outline: none;
   }
   @media #{$mobile} {
-    border-radius: 15px;
-    padding: 1% 0;
     border: transparent;
     color: white;
-    font-size: 50px;
-    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    font-size: 30px;
     outline: none;
   }
 }
 
-%activeProperties {
-  box-shadow: 0px 0px;
-  border: transparent;
-}
-
 .save {
   @extend %boton;
-  background-color: rgba(96, 133, 235, 0.8);
-  font-size: 20px;
-  margin: 4% 0 5%;
+  @media #{$desktop} , #{$tablet} {
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 20px;
+    margin: 4% 0 5%;
+  }
+  @media #{$mobile} {
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 30px;
+    padding: 0;
+    margin: 0 0 2px;
+  }
 }
 
 .save:active {
   @extend %activeProperties;
-  margin: 4.2% 0 5%;
+  margin: 5% 0;
+  @media #{$mobile} {
+    font-size: 28px;
+    margin: 0 0;
+    padding: 1%;
+  }
 }
 
 .deleteAll {
@@ -85,7 +108,6 @@
   @media #{$mobile} {
     width: 40%;
     background-color: #ff8200;
-    margin: 5px 20% 5px 10%;
     float: right;
   }
 }
@@ -94,7 +116,9 @@
   @extend %activeProperties;
   margin: 6px 5% 0px 5%;
   @media #{$mobile} {
-    margin: 6px 20% 0px 10%;
+    margin: 0;
+    padding: 1%;
+    font-size: 20px;
   }
 }
 
@@ -107,9 +131,8 @@
     float: right;
   }
   @media #{$mobile} {
-    width: 30%;
+    width: 35%;
     background-color: #ff8200;
-    margin: 5px 0px;
     float: right;
   }
 }
@@ -117,6 +140,11 @@
 .delete:active {
   @extend %activeProperties;
   margin: 7px 0px 3px 0px;
+  @media #{$mobile} {
+    margin: 0;
+    padding: 1%;
+    font-size: 20px;
+  }
 }
 
 .number {
@@ -128,7 +156,8 @@
   @extend %activeProperties;
   margin: 5.5% 5px 1%;
   @media #{$mobile} {
-    margin: 2.3% 5px 0%;
+    margin: 0;
+    font-size: 27px;
   }
 }
 
@@ -142,7 +171,9 @@
   @extend %activeProperties;
   margin: 5.5% 5px 0px;
   @media #{$mobile} {
-    margin: 2.5% 5px 0px;
+    margin: 0;
+    padding: 1%;
+    font-size: 20px;
   }
 }
 
@@ -154,17 +185,17 @@
     background-color: orange;
   }
   @media #{$mobile} {
-    width: 40%;
-    margin: 2% 5px 1%;
+    width: 50%;
     background-color: orange;
   }
 }
 
 .cero:active {
   @extend %activeProperties;
-  margin: 5.5% 10% 5% 0;
   @media #{$mobile} {
-    margin: 2.5% 5px 0%;
+    margin: 0;
+    padding: 1%;
+    font-size: 27px;
   }
 }
 
@@ -176,6 +207,11 @@
 .igual:active {
   @extend %activeProperties;
   margin: 5.5% 5px 0%;
+  @media #{$mobile} {
+    margin: 0;
+    padding: 1%;
+    font-size: 27px;
+  }
 }
 
 .deleteAllTrace {
@@ -187,6 +223,16 @@
 }
 .editExpression {
   @extend %traceButtons;
+}
+
+.editExpression:active {
+  @extend %activeProperties;
+  @media #{$desktop} {
+    margin: 6% 2% 0;
+  }
+  @media #{$tablet} {
+    margin: 6% 1% 0;
+  }
 }
 
 .activeButtons {

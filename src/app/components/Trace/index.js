@@ -30,7 +30,7 @@ class Trace extends PureComponent {
 
   render() {
     return (
-      <div>
+      <div className={styles.traceContainer}>
         <h1 className={styles.traceTittle}>Trace</h1>
         <div className={styles.traceElementContainer}>
           <input

@@ -1,15 +1,41 @@
+@import 'scss/variables/_mediaQueries.scss';
+
+.traceContainer {
+  @media #{$desktop}, #{$desktop-tablet} {
+  }
+  @media #{$mobile} {
+    width: 70%;
+  }
+}
+
 .traceTittle {
-  margin: 0;
-  padding: 3% 0;
+  @media #{$desktop}, #{$desktop-tablet} {
+    margin: 0;
+    padding: 3% 0;
+  }
+  @media #{$mobile} {
+    margin: 0;
+    font-size: 20px;
+  }
 }
 
 .traceElementContainer {
-  background-color: rgba(150, 150, 150, 1);
+  @media #{$desktop}, #{$desktop-tablet} {
+    background-color: rgba(150, 150, 150, 1);
+  }
+  @media #{$mobile} {
+    background-color: rgba(150, 150, 150, 1);
+    border-radius: 15px;
+    text-align: center;
+  }
 }
 
 .traceInput {
   border: none;
   border-radius: 15px;
+  @media #{$mobile} {
+    width: 85%;
+  }
 }
 
 .traceElement {
