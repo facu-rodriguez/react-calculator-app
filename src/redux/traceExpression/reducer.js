@@ -16,7 +16,6 @@ export const deleteTrace = state => {
 };
 
 export const deleteSome = (state, expressionId) => {
-  console.log({ expressionId });
   return {
     traceExpression: [...state.traceExpression.filter(item => item.id !== expressionId)]
   };
@@ -44,7 +43,6 @@ export const reducer = (state = defaultState, action) => {
       return deleteSome(state, action.payload);
       break;
     case 'EDIT_EXPRESSION':
-      console.log(action);
       return changeExpression(state, action.payload.id, action.payload.newValue);
       break;
 

@@ -149,7 +149,6 @@ class AppContainer extends PureComponent {
         break;
       case 'deleteSomeTrace':
         {
-          console.log({ state: this.state.selectedTraceExpressionId });
           this.props.dispatch(deleteSomeExpressionAction(this.state.selectedTraceExpressionId));
         }
         break;
