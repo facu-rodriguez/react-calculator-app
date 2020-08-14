@@ -6,8 +6,18 @@ import styles from './style.module.scss';
 import { element } from 'prop-types';
 
 class Trace extends PureComponent {
-  handleValuePress = () => {
-    this.props.handleClick(this.props.value);
+  handleValuePress = e => {
+    switch (e.keyCode) {
+      case 8:
+        this.props.handleClickNewExpression('delete');
+        break;
+      case 13:
+        this.props.handleClickNewExpression('=');
+        break;
+      default:
+        this.props.handleClickNewExpression(e.key);
+        break;
+    }
   };
 
   handleRenderExpression = objectExpression => (
@@ -23,7 +33,7 @@ class Trace extends PureComponent {
       <div>
         <h1 className={styles.traceTittle}>Trace</h1>
         <div className={styles.traceElementContainer}>
-          <input type="text" value={this.props.value} onClick={this.handleValuePress}></input>
+          <input type="text" value={this.props.value} onKeyDown={this.handleValuePress} />
           {this.props.expression.traceExpression.map(objectExpression =>
             this.handleRenderExpression(objectExpression)
           )}

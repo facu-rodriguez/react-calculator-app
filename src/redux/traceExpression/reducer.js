@@ -21,8 +21,12 @@ export const deleteSome = (state, expressionId) => {
     traceExpression: [...state.traceExpression.filter(item => item.id !== expressionId)]
   };
 };
-export const changeExpression = (state, index, newValue) => {
-  let newExpression = state.traceExpression.splice(index, 1, newValue);
+export const changeExpression = (state, id, newValue) => {
+  let newExpression = state.traceExpression.map(obj => {
+    if (obj.id === id) {
+      obj.expression = newValue;
+    }
+  });
   return {
     traceExpression: [...state.traceExpression]
   };
@@ -41,7 +45,7 @@ export const reducer = (state = defaultState, action) => {
       break;
     case 'EDIT_EXPRESSION':
       console.log(action);
-      return changeExpression(state, action.payload.index, action.payload.newValue);
+      return changeExpression(state, action.payload.id, action.payload.newValue);
       break;
 
     default:

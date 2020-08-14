@@ -28,21 +28,44 @@ class AppContainer extends PureComponent {
     };
   }
 
-  selectedTraceIndex = 0;
-  modifyExpression = 0;
-
-  handleClickTrace = (expressionId, index, modifyExpression) => {
+  handleClickTrace = expressionId => {
     this.setState(() => ({
       selectedTraceExpressionId: expressionId
     }));
-    return (
-      (this.selectedTraceIndex = index),
-      (modifyExpression = this.state.newExpression)
-    );
+  };
+
+  handleClickNewExpression = value => {
+    switch (value) {
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+      case '=':
+        this.setState(prevState => ({
+          newExpression: prevState.newExpression + '' + value
+        }));
+        break;
+      case 'delete':
+        this.setState(prevState => ({
+          newExpression: prevState.newExpression.toString().slice(0, -1)
+        }));
+        break;
+      case 'c':
+        this.setState(prevState => ({
+          newExpression: ''
+        }));
+        break;
+
+      default:
+        if (isFinite(value)) {
+          this.setState(prevState => ({
+            newExpression: prevState.newExpression + '' + value
+          }));
+        }
+    }
   };
 
   handleClick = value => {
-    console.log(value);
     switch (value) {
       case '+':
       case '-':
@@ -55,15 +78,13 @@ class AppContainer extends PureComponent {
             case '*':
             case '/':
               return {
-                firstExpression: this.firstExpression + ' ' + value + ' ' + this.state.expression,
-                newExpression: this.firstExpression
+                firstExpression: this.firstExpression + ' ' + value + ' ' + this.state.expression
               };
               break;
 
             default:
               return {
                 firstExpression: prevState.expression,
-                newExpression: prevState.firstExpression,
                 operacion: value,
                 expression: ''
               };
@@ -81,8 +102,7 @@ class AppContainer extends PureComponent {
               return {
                 expression: resultado,
                 operacion: '',
-                firstExpression: '',
-                newExpression: this.expression
+                firstExpression: ''
               };
               break;
             case '-':
@@ -127,21 +147,21 @@ class AppContainer extends PureComponent {
       case 'deleteAllTrace':
         this.props.dispatch(deleteAllExpressionAction(this.state));
         break;
-      case 'deleteSomeTrace':{
-        console.log({state: this.state.selectedTraceExpressionId})
-        this.props.dispatch(deleteSomeExpressionAction(this.state.selectedTraceExpressionId));
-      }
+      case 'deleteSomeTrace':
+        {
+          console.log({ state: this.state.selectedTraceExpressionId });
+          this.props.dispatch(deleteSomeExpressionAction(this.state.selectedTraceExpressionId));
+        }
         break;
       case 'editExpression':
-        console.log(this.modifyExpression);
-        return this.props.dispatch(editExpressionAction(this.selectedTraceIndex, this.modifyExpression));
-
+        return this.props.dispatch(
+          editExpressionAction(this.state.selectedTraceExpressionId, this.state.newExpression)
+        );
         break;
       default:
         if (isFinite(value)) {
           this.setState(prevState => ({
-            expression: prevState.expression + '' + value,
-            newExpression: this.expression
+            expression: prevState.expression + '' + value
           }));
         }
     }
@@ -153,7 +173,7 @@ class AppContainer extends PureComponent {
         <div className={styles.containerTrace}>
           <Trace
             value={this.state.newExpression}
-            handleClick={this.handleClick}
+            handleClickNewExpression={this.handleClickNewExpression}
             handleClickTrace={this.handleClickTrace}
           />
         </div>
