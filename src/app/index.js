@@ -20,8 +20,6 @@ class AppContainer extends PureComponent {
     super(props);
     this.state = {
       expression: '',
-      operacion: '',
-      firstExpression: '',
       newExpression: '',
       idCurrentExpresion: 0,
       selectedTraceExpressionId: null
@@ -42,7 +40,7 @@ class AppContainer extends PureComponent {
       case '/':
       case '=':
         this.setState(prevState => ({
-          newExpression: prevState.newExpression + '' + value
+          newExpression: prevState.newExpression.concat(value)
         }));
         break;
       case 'delete':
@@ -59,7 +57,7 @@ class AppContainer extends PureComponent {
       default:
         if (isFinite(value)) {
           this.setState(prevState => ({
-            newExpression: prevState.newExpression + '' + value
+            newExpression: prevState.newExpression.concat(value)
           }));
         }
     }
@@ -72,51 +70,17 @@ class AppContainer extends PureComponent {
       case '*':
       case '/':
         this.setState(prevState => {
-          switch (prevState.operacion) {
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-              return {
-                firstExpression: this.firstExpression + ' ' + value + ' ' + this.state.expression
-              };
-              break;
-
-            default:
-              return {
-                firstExpression: prevState.expression,
-                operacion: value,
-                expression: ''
-              };
-          }
+          return {
+            expression: prevState.expression.concat(value)
+          };
         });
         break;
       case '=':
         this.setState(prevState => {
-          const primerValor = eval(prevState.firstExpression);
-          const segundoValor = eval(prevState.expression);
-          let resultado = '';
-          switch (prevState.operacion) {
-            case '+':
-              resultado = primerValor + segundoValor;
-              return {
-                expression: resultado,
-                operacion: '',
-                firstExpression: ''
-              };
-              break;
-            case '-':
-              resultado = primerValor - segundoValor;
-              return { expression: resultado, operacion: '', firstExpression: '' };
-              break;
-            case '*':
-              resultado = primerValor * segundoValor;
-              return { expression: resultado, operacion: '', firstExpression: '' };
-              break;
-            case '/':
-              resultado = primerValor / segundoValor;
-              return { expression: resultado, operacion: '', firstExpression: '' };
-              break;
+          if (isFinite(prevState.expression.slice(-1))) {
+            const resultado = eval(prevState.expression);
+            const resultadoToString = resultado.toString();
+            return { expression: resultadoToString };
           }
         });
         break;
@@ -127,15 +91,12 @@ class AppContainer extends PureComponent {
         break;
       case 'C':
         this.setState(() => ({
-          expression: '',
-          operacion: '',
-          firstExpression: ''
+          expression: ''
         }));
         break;
       case 'save':
         {
-          const formatExpression =
-            this.state.firstExpression + ' ' + this.state.operacion + ' ' + this.state.expression;
+          const formatExpression = this.state.expression;
           this.props.dispatch(
             saveExpressionAction({ id: this.state.idCurrentExpresion, expression: formatExpression })
           );
@@ -160,7 +121,7 @@ class AppContainer extends PureComponent {
       default:
         if (isFinite(value)) {
           this.setState(prevState => ({
-            expression: prevState.expression + '' + value
+            expression: prevState.expression.concat(value)
           }));
         }
     }
@@ -178,10 +139,7 @@ class AppContainer extends PureComponent {
         </div>
         <div className={styles.containerCalculator}>
           <div className={styles.input}>
-            <Input
-              value={this.state.firstExpression + ' ' + this.state.operacion + ' ' + this.state.expression}
-              handleClick={this.handleClick}
-            />
+            <Input value={this.state.expression} handleClick={this.handleClick} />
           </div>
           <div className={styles.buttons}>
             <ButonsConfig handleClick={this.handleClick} />
