@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import store from 'redux/store';
 import {
-  saveExpressionAction,
   deleteAllExpressionAction,
   deleteSomeExpressionAction,
   editExpressionAction
 } from 'redux/traceExpression/actions';
+import traceExpressionActions from 'redux/traceExpression/actions1';
 import { connect } from 'react-redux';
 
 import ButonsConfig from 'app/components/RenderButons';
@@ -97,8 +97,12 @@ class AppContainer extends PureComponent {
       case 'save':
         {
           const formatExpression = this.state.expression;
+          // this.props.dispatch(traceExpressionActions.cleanSaveExpression());
           this.props.dispatch(
-            saveExpressionAction({ id: this.state.idCurrentExpresion, expression: formatExpression })
+            traceExpressionActions.saveExpressionAction({
+              id: this.state.idCurrentExpresion,
+              expression: formatExpression
+            })
           );
           this.setState(prevState => ({
             idCurrentExpresion: prevState.idCurrentExpresion + 1
