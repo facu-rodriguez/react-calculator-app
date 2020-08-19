@@ -5,7 +5,6 @@ export const defaultState = {
 };
 
 export const addExpression = (state, expression) => {
-  getChoices();
   return {
     ...state,
     traceExpression: [...state.traceExpression, expression]

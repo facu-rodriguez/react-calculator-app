@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react';
 import store from 'redux/store';
-import {
-  deleteAllExpressionAction,
-  deleteSomeExpressionAction,
-  editExpressionAction
-} from 'redux/traceExpression/actions';
-import traceExpressionActions from 'redux/traceExpression/actions1';
+import traceExpressionActions from 'redux/traceExpression/actions';
 import { connect } from 'react-redux';
 
 import ButonsConfig from 'app/components/RenderButons';
@@ -110,16 +105,35 @@ class AppContainer extends PureComponent {
         }
         break;
       case 'deleteAllTrace':
-        this.props.dispatch(deleteAllExpressionAction(this.state));
+        const formatTrace = this.state;
+        //this.props.dispatch(deleteAllExpressionAction(this.state));
+        this.props.dispatch(
+          traceExpressionActions.deleteAllAction({
+            expression: ''
+          })
+        );
         break;
       case 'deleteSomeTrace':
         {
-          this.props.dispatch(deleteSomeExpressionAction(this.state.selectedTraceExpressionId));
+          const formatId = this.state.selectedTraceExpressionId;
+          //this.props.dispatch(deleteSomeExpressionAction(this.state.selectedTraceExpressionId));
+          this.props.dispatch(
+            traceExpressionActions.deleteSomeExpressionAction({
+              id: formatId
+            })
+          );
         }
         break;
       case 'editExpression':
-        return this.props.dispatch(
-          editExpressionAction(this.state.selectedTraceExpressionId, this.state.newExpression)
+        //return this.props.dispatch(
+        //  editExpressionAction(this.state.selectedTraceExpressionId, this.state.newExpression)
+        //);
+        const formatNewExpression = this.state.newExpression;
+        this.props.dispatch(
+          traceExpressionActions.changeExpressionAction({
+            id: this.state.selectedTraceExpressionId,
+            expression: formatNewExpression
+          })
         );
         break;
       default:

@@ -1,19 +1,28 @@
 import Immutable from 'seamless-immutable';
 import { completeReducer, createReducer } from 'redux-recompose';
 
-import { actions } from './actions1';
+import { actions } from './actions';
 
 export const defaultState = {
-  saveExpression: '32423424',
+  traceExpression: [],
+  saveExpression: '',
   saveExpressionLoading: false,
   saveExpressionError: null
 };
 
+//const addExpression = (state, expression) => {
+//  return {
+//    ...state,
+//    traceExpression: [...state.traceExpression, expression]
+//  };
+//};
+
 const reducerDescription = {
-  primaryActions: [actions.SAVE_EXPRESSION],
+  //SAVE_EXPRESSION: addExpression(defaultState.traceExpression, action),
+  primaryActions: [actions.SAVE_EXPRESSION, actions.DELETE_SOME_EXPRESSION, actions.CHANGE_EXPRESSION],
 
   override: {
-    [actions.CLEAN_SAVE_EXPRESSION]: state => Immutable.merge(state, { saveExpression: '' })
+    [actions.DELETE_ALL]: state => Immutable.merge(state, { saveExpression: '' })
   }
 };
 
