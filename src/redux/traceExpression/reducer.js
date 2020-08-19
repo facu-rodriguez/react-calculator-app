@@ -1,8 +1,11 @@
+import getChoices from 'services/traceService';
+
 export const defaultState = {
   traceExpression: []
 };
 
 export const addExpression = (state, expression) => {
+  getChoices();
   return {
     ...state,
     traceExpression: [...state.traceExpression, expression]

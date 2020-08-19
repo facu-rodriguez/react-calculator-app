@@ -1,8 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: 'https://thesimpsonsquoteapi.glitch.me',
-  timeout: 30000
+  baseURL: 'https://polls.apiblueprint.org/questions'
 });
 
 export default api;
