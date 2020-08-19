@@ -2,8 +2,10 @@ import { createTypes, completeTypes } from 'redux-recompose';
 
 import traceService from 'services/traceService';
 
+import {TYPE_ADD_EXPRESSION} from './constant';
+
 export const actions = createTypes(
-  completeTypes(['SAVE_EXPRESSION', 'DELETE_SOME_EXPRESSION', 'CHANGE_EXPRESSION'], ['DELETE_ALL']),
+  completeTypes(['SAVE_EXPRESSION', 'DELETE_SOME_EXPRESSION', 'CHANGE_EXPRESSION'], ['DELETE_ALL', 'HANDLE_TRACE_EXPRESSION']),
   '@@TRACE_EXPRESSION'
 );
 
@@ -46,7 +48,9 @@ const actionCreators = {
     const response = await traceService.postTrace(expression);
     if (response.ok) {
       dispatch(privateActionCreators.saveExpressionSuccess(response.data.expression));
+      dispatch(actionCreators.handleTraceExpression(TYPE_ADD_EXPRESSION));
     } else dispatch(privateActionCreators.saveExpressionFailure('salio mal'));
+
   },
   deleteSomeExpressionAction: expressionId => async dispatch => {
     dispatch({ type: actions.DELETE_SOME_EXPRESSION, target: 'deleteSomeExpression' });
@@ -62,7 +66,21 @@ const actionCreators = {
       dispatch(privateActionCreators.changeExpressionSuccess(response.data.choices));
     } else dispatch(privateActionCreators.changeExpressionFailure('salio como el reverendo ogt'));
   },
-  deleteAllAction: state => dispatch => dispatch({ type: actions.DELETE_ALL }, traceService.deleteAll(state))
+  deleteAllAction: state => dispatch => dispatch({ type: actions.DELETE_ALL }, traceService.deleteAll(state)),
+  handleTraceExpression: (type,expression, idExpresion, newValue) => (dispatch, getState) => {
+    const traceExpressionArray = getState().traceExpressionTest.traceExpression;
+    switch(type){
+      case TYPE_ADD_EXPRESSION{
+
+      }
+    }
+
+
+
+
+
+
+  }
 };
 
 export default actionCreators;

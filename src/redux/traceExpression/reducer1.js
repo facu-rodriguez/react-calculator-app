@@ -7,7 +7,13 @@ export const defaultState = {
   traceExpression: [],
   saveExpression: '',
   saveExpressionLoading: false,
-  saveExpressionError: null
+  saveExpressionError: null,
+  deleteSomeExpression: '',
+  deleteSomeExpressionLoading: false,
+  deleteSomeExpressionError: null,
+  changeExpression: '',
+  changeExpressionLoading: false,
+  changeExpressionError: null
 };
 
 //const addExpression = (state, expression) => {
@@ -18,11 +24,14 @@ export const defaultState = {
 //};
 
 const reducerDescription = {
-  //SAVE_EXPRESSION: addExpression(defaultState.traceExpression, action),
   primaryActions: [actions.SAVE_EXPRESSION, actions.DELETE_SOME_EXPRESSION, actions.CHANGE_EXPRESSION],
 
   override: {
-    [actions.DELETE_ALL]: state => Immutable.merge(state, { saveExpression: '' })
+    [actions.DELETE_ALL]: state => Immutable.merge(state, { saveExpression: '' }),
+    [actions.HANDLE_TRACE_EXPRESSION]: (state, action) =>
+      Immutable.merge(state, {
+        traceExpression: action.payload
+      })
   }
 };
 
