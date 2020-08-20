@@ -92,31 +92,25 @@ class AppContainer extends PureComponent {
       case 'save':
         {
           const formatExpression = this.state.expression;
-          // this.props.dispatch(traceExpressionActions.cleanSaveExpression());
-          this.props.dispatch(
-            traceExpressionActions.saveExpressionAction({
-              id: this.state.idCurrentExpresion,
-              expression: formatExpression
-            })
-          );
+          if (formatExpression.length !== 0) {
+            this.props.dispatch(
+              traceExpressionActions.saveExpressionAction({
+                id: this.state.idCurrentExpresion,
+                expression: formatExpression
+              })
+            );
+          }
           this.setState(prevState => ({
             idCurrentExpresion: prevState.idCurrentExpresion + 1
           }));
         }
         break;
       case 'deleteAllTrace':
-        const formatTrace = this.state;
-        //this.props.dispatch(deleteAllExpressionAction(this.state));
-        this.props.dispatch(
-          traceExpressionActions.deleteAllAction({
-            expression: ''
-          })
-        );
+        this.props.dispatch(traceExpressionActions.deleteAllAction());
         break;
       case 'deleteSomeTrace':
         {
           const formatId = this.state.selectedTraceExpressionId;
-          //this.props.dispatch(deleteSomeExpressionAction(this.state.selectedTraceExpressionId));
           this.props.dispatch(
             traceExpressionActions.deleteSomeExpressionAction({
               id: formatId
@@ -125,9 +119,6 @@ class AppContainer extends PureComponent {
         }
         break;
       case 'editExpression':
-        //return this.props.dispatch(
-        //  editExpressionAction(this.state.selectedTraceExpressionId, this.state.newExpression)
-        //);
         const formatNewExpression = this.state.newExpression;
         this.props.dispatch(
           traceExpressionActions.changeExpressionAction({

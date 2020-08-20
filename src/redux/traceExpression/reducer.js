@@ -1,54 +1,31 @@
-import getChoices from 'services/traceService';
+import Immutable from 'seamless-immutable';
+import { completeReducer, createReducer } from 'redux-recompose';
+
+import { actions } from './actions';
 
 export const defaultState = {
-  traceExpression: []
+  traceExpression: [],
+  saveExpression: '',
+  saveExpressionLoading: false,
+  saveExpressionError: null,
+  deleteSomeExpression: '',
+  deleteSomeExpressionLoading: false,
+  deleteSomeExpressionError: null,
+  changeExpression: '',
+  changeExpressionLoading: false,
+  changeExpressionError: null
 };
 
-export const addExpression = (state, expression) => {
-  return {
-    ...state,
-    traceExpression: [...state.traceExpression, expression]
-  };
-};
+const reducerDescription = {
+  primaryActions: [actions.SAVE_EXPRESSION, actions.DELETE_SOME_EXPRESSION, actions.CHANGE_EXPRESSION],
 
-export const deleteTrace = state => {
-  return {
-    traceExpression: state
-  };
-};
-
-export const deleteSome = (state, expressionId) => {
-  return {
-    traceExpression: [...state.traceExpression.filter(item => item.id !== expressionId)]
-  };
-};
-export const changeExpression = (state, id, newValue) => {
-  let newExpression = state.traceExpression.map(obj => {
-    if (obj.id === id) {
-      obj.expression = newValue;
-    }
-  });
-  return {
-    traceExpression: [...state.traceExpression]
-  };
-};
-
-export const reducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case 'SAVE_EXPRESSION':
-      return addExpression(state, action.payload);
-      break;
-    case 'DELETE_ALL_TRACE':
-      return deleteTrace((state = []));
-      break;
-    case 'DELETE_SOME_EXPRESSION':
-      return deleteSome(state, action.payload);
-      break;
-    case 'EDIT_EXPRESSION':
-      return changeExpression(state, action.payload.id, action.payload.newValue);
-      break;
-
-    default:
-      return state;
+  override: {
+    [actions.DELETE_ALL]: state => Immutable.merge(state, { traceExpression: [] }),
+    [actions.HANDLE_TRACE_EXPRESSION]: (state = defaultState.traceExpression, action) =>
+      Immutable.merge(state, {
+        traceExpression: action.payload
+      })
   }
 };
+
+export const reducer = createReducer(Immutable(defaultState), completeReducer(reducerDescription));

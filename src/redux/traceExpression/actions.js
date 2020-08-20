@@ -2,10 +2,13 @@ import { createTypes, completeTypes } from 'redux-recompose';
 
 import traceService from 'services/traceService';
 
-import {TYPE_ADD_EXPRESSION} from './constant';
+import { TYPE_ADD_EXPRESSION, TYPE_DELETE_EXPRESSION, TYPE_CHANGE_EXPRESSION } from './constant';
 
 export const actions = createTypes(
-  completeTypes(['SAVE_EXPRESSION', 'DELETE_SOME_EXPRESSION', 'CHANGE_EXPRESSION'], ['DELETE_ALL', 'HANDLE_TRACE_EXPRESSION']),
+  completeTypes(
+    ['SAVE_EXPRESSION', 'DELETE_SOME_EXPRESSION', 'CHANGE_EXPRESSION'],
+    ['DELETE_ALL', 'HANDLE_TRACE_EXPRESSION']
+  ),
   '@@TRACE_EXPRESSION'
 );
 
@@ -21,7 +24,7 @@ const privateActionCreators = {
     payload: error
   }),
   deleteSomeExpressionSuccess: payload => ({
-    type: actions.DELETE_SOME_EXPRESSION_SUCCES,
+    type: actions.DELETE_SOME_EXPRESSION_SUCCESS,
     target: 'deleteSomeExpression',
     payload: payload
   }),
@@ -31,7 +34,7 @@ const privateActionCreators = {
     payload: error
   }),
   changeExpressionSuccess: payload => ({
-    type: actions.CHANGE_EXPRESSION_SUCCES,
+    type: actions.CHANGE_EXPRESSION_SUCCESS,
     target: 'changeExpression',
     payload: payload
   }),
@@ -47,39 +50,73 @@ const actionCreators = {
     dispatch({ type: actions.SAVE_EXPRESSION, target: 'saveExpression' });
     const response = await traceService.postTrace(expression);
     if (response.ok) {
-      dispatch(privateActionCreators.saveExpressionSuccess(response.data.expression));
-      dispatch(actionCreators.handleTraceExpression(TYPE_ADD_EXPRESSION));
+      let answ = response.data.map(i => i.message);
+      window.alert(answ);
+      dispatch(privateActionCreators.saveExpressionSuccess(expression));
+      dispatch(
+        actionCreators.handleTraceExpression(TYPE_ADD_EXPRESSION, expression.expression, expression.id)
+      );
+      traceService.getTrace();
     } else dispatch(privateActionCreators.saveExpressionFailure('salio mal'));
-
   },
   deleteSomeExpressionAction: expressionId => async dispatch => {
     dispatch({ type: actions.DELETE_SOME_EXPRESSION, target: 'deleteSomeExpression' });
     const response = await traceService.deleteSomeExpression(expressionId);
     if (response.ok) {
-      dispatch(privateActionCreators.deleteSomeExpressionSuccess(response.data.choices));
-    } else dispatch(privateActionCreators.deleteSomeExpressionFailure('salio re mal'));
+      let answ = response.data.map(i => i.message);
+      window.alert(answ);
+      dispatch(privateActionCreators.deleteSomeExpressionSuccess(expressionId));
+      dispatch(actionCreators.handleTraceExpression(TYPE_DELETE_EXPRESSION, undefined, expressionId.id));
+    } else dispatch(privateActionCreators.deleteSomeExpressionFailure('salio mal'));
   },
-  changeExpressionAction: (id, newValue) => async dispatch => {
+  changeExpressionAction: newValue => async dispatch => {
     dispatch({ type: actions.CHANGE_EXPRESSION, target: 'changeExpression' });
-    const response = await traceService.putExpression(id, newValue);
+    const response = await traceService.putExpression(newValue);
     if (response.ok) {
-      dispatch(privateActionCreators.changeExpressionSuccess(response.data.choices));
-    } else dispatch(privateActionCreators.changeExpressionFailure('salio como el reverendo ogt'));
+      let answ = response.data.map(i => i.message);
+      window.alert(answ);
+      dispatch(privateActionCreators.changeExpressionSuccess(newValue));
+      dispatch(
+        actionCreators.handleTraceExpression(TYPE_CHANGE_EXPRESSION, newValue.expression, newValue.id)
+      );
+    } else dispatch(privateActionCreators.changeExpressionFailure('salio mal'));
   },
-  deleteAllAction: state => dispatch => dispatch({ type: actions.DELETE_ALL }, traceService.deleteAll(state)),
-  handleTraceExpression: (type,expression, idExpresion, newValue) => (dispatch, getState) => {
-    const traceExpressionArray = getState().traceExpressionTest.traceExpression;
-    switch(type){
-      case TYPE_ADD_EXPRESSION{
+  handleTraceExpression: (type, expression, idExpresion) => (dispatch, getState) => {
+    const traceExpressionArray = getState().traceExpression;
+    switch (type) {
+      case TYPE_ADD_EXPRESSION:
+        dispatch({
+          type: actions.HANDLE_TRACE_EXPRESSION,
+          payload: [...traceExpressionArray.traceExpression, { id: idExpresion, expression: expression }]
+        });
+        break;
+      case TYPE_DELETE_EXPRESSION:
+        dispatch({
+          type: actions.HANDLE_TRACE_EXPRESSION,
+          payload: traceExpressionArray.traceExpression.filter(item => item.id !== idExpresion)
+        });
+        break;
+      case TYPE_CHANGE_EXPRESSION:
+        let newExpression = traceExpressionArray.traceExpression.map(obj => {
+          if (obj.id === idExpresion) {
+            return { ...obj, expression };
+          }
+          return obj;
+        });
+        dispatch({
+          type: actions.HANDLE_TRACE_EXPRESSION,
+          payload: newExpression
+        });
 
-      }
+        break;
     }
+  },
 
-
-
-
-
-
+  deleteAllAction: () => async dispatch => {
+    dispatch({ type: actions.DELETE_ALL }, traceService.deleteAll());
+    const response = await traceService.deleteAll();
+    let answ = response.data.map(i => i.message);
+    window.alert(answ);
   }
 };
 
