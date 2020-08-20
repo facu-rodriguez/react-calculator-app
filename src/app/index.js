@@ -20,6 +20,7 @@ class AppContainer extends PureComponent {
     super(props);
     this.state = {
       expression: '',
+      operacion: false,
       newExpression: '',
       idCurrentExpresion: 0,
       selectedTraceExpressionId: null
@@ -70,14 +71,18 @@ class AppContainer extends PureComponent {
       case '*':
       case '/':
         this.setState(prevState => {
-          return {
-            expression: prevState.expression.concat(value)
-          };
+          if (prevState.operacion === false) {
+            return {
+              expression: prevState.expression.concat(' ' + value + ' '),
+              operacion: true
+            };
+          }
         });
         break;
       case '=':
         this.setState(prevState => {
           if (isFinite(prevState.expression.slice(-1))) {
+            console.log(prevState.expression);
             const resultado = eval(prevState.expression);
             const resultadoToString = resultado.toString();
             return { expression: resultadoToString };
@@ -121,7 +126,8 @@ class AppContainer extends PureComponent {
       default:
         if (isFinite(value)) {
           this.setState(prevState => ({
-            expression: prevState.expression.concat(value)
+            expression: prevState.expression.concat(value),
+            operacion: false
           }));
         }
     }
