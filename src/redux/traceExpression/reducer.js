@@ -17,10 +17,14 @@ export const defaultState = {
 };
 
 const reducerDescription = {
-  primaryActions: [actions.SAVE_EXPRESSION, actions.DELETE_SOME_EXPRESSION, actions.CHANGE_EXPRESSION],
+  primaryActions: [
+    actions.SAVE_EXPRESSION,
+    actions.DELETE_SOME_EXPRESSION,
+    actions.CHANGE_EXPRESSION,
+    actions.DELETE_ALL
+  ],
 
   override: {
-    [actions.DELETE_ALL]: state => Immutable.merge(state, { traceExpression: [] }),
     [actions.HANDLE_TRACE_EXPRESSION]: (state = defaultState.traceExpression, action) =>
       Immutable.merge(state, {
         traceExpression: action.payload

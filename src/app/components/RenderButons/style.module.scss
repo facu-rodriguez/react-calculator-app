@@ -1,10 +1,5 @@
 @import 'scss/variables/_mediaQueries.scss';
 
-%activeProperties {
-  box-shadow: 0px 0px;
-  border: transparent;
-}
-
 %boton {
   @media #{$desktop}, #{$tablet} {
     border-radius: 15px;
@@ -16,6 +11,10 @@
     font-size: 30px;
     box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
     outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
   }
   @media #{$mobile} {
     width: 25%;
@@ -23,6 +22,10 @@
     color: white;
     font-size: 30px;
     outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
   }
 }
 
@@ -34,23 +37,23 @@
     font-size: 15px;
     width: 30%;
     padding: 3% 0;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+      margin: 6% 5px 5%;
+    }
   }
   @media #{$mobile} {
     opacity: 0.4;
     background-color: rgba(96, 133, 235, 0.8);
     font-size: 16px;
     width: 33.3%;
-  }
-}
-
-%traceButtons:active {
-  @extend %activeProperties;
-  @media #{$desktop}, #{$tablet} {
-    margin: 6% 5px 5%;
-  }
-  @media #{$mobile} {
-    margin: 0;
-    font-size: 14px;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+      margin: 0;
+      font-size: 14px;
+    }
   }
 }
 
@@ -63,12 +66,20 @@
     font-size: 30px;
     box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
     outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
   }
   @media #{$mobile} {
     border: transparent;
     color: white;
     font-size: 30px;
     outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
   }
 }
 
@@ -78,22 +89,20 @@
     background-color: rgba(96, 133, 235, 0.8);
     font-size: 20px;
     margin: 4% 0 5%;
+    &:active {
+      margin: 5% 0;
+    }
   }
   @media #{$mobile} {
     background-color: rgba(96, 133, 235, 0.8);
     font-size: 30px;
     padding: 0;
     margin: 0 0 2px;
-  }
-}
-
-.save:active {
-  @extend %activeProperties;
-  margin: 5% 0;
-  @media #{$mobile} {
-    font-size: 28px;
-    margin: 0 0;
-    padding: 1%;
+    &:active {
+      font-size: 28px;
+      margin: 0 0;
+      padding: 1%;
+    }
   }
 }
 
@@ -104,21 +113,19 @@
     background-color: #ff8200;
     margin: 5px 5% 5px 5%;
     float: right;
+    &:active {
+      margin: 6px 5% 0px 5%;
+    }
   }
   @media #{$mobile} {
     width: 40%;
     background-color: #ff8200;
     float: right;
-  }
-}
-
-.deleteAll:active {
-  @extend %activeProperties;
-  margin: 6px 5% 0px 5%;
-  @media #{$mobile} {
-    margin: 0;
-    padding: 1%;
-    font-size: 20px;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 20px;
+    }
   }
 }
 
@@ -129,35 +136,32 @@
     background-color: #ff8200;
     margin: 5px 0px 5px 0px;
     float: right;
+    &:active {
+      margin: 7px 0px 3px 0px;
+    }
   }
   @media #{$mobile} {
     width: 35%;
     background-color: #ff8200;
     float: right;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 20px;
+    }
   }
 }
-
-.delete:active {
-  @extend %activeProperties;
-  margin: 7px 0px 3px 0px;
-  @media #{$mobile} {
-    margin: 0;
-    padding: 1%;
-    font-size: 20px;
-  }
-}
-
 .number {
   @extend %boton;
   background-color: orange;
-}
-
-.number:active {
-  @extend %activeProperties;
-  margin: 5.5% 5px 1%;
+  &:active {
+    margin: 5.5% 5px 1%;
+  }
   @media #{$mobile} {
-    margin: 0;
-    font-size: 27px;
+    &:active {
+      margin: 0;
+      font-size: 27px;
+    }
   }
 }
 
@@ -165,15 +169,15 @@
   @extend %boton;
   background-color: #989694;
   float: right;
-}
-
-.operador:active {
-  @extend %activeProperties;
-  margin: 5.5% 5px 0px;
+  &:active {
+    margin: 5.5% 5px 0px;
+  }
   @media #{$mobile} {
-    margin: 0;
-    padding: 1%;
-    font-size: 20px;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 20px;
+    }
   }
 }
 
@@ -187,30 +191,26 @@
   @media #{$mobile} {
     width: 50%;
     background-color: orange;
-  }
-}
-
-.cero:active {
-  @extend %activeProperties;
-  @media #{$mobile} {
-    margin: 0;
-    padding: 1%;
-    font-size: 27px;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 27px;
+    }
   }
 }
 
 .igual {
   @extend %boton;
   background-color: rgba(150, 191, 50, 1);
-}
-
-.igual:active {
-  @extend %activeProperties;
-  margin: 5.5% 5px 0%;
+  &:active {
+    margin: 5.5% 5px 0%;
+  }
   @media #{$mobile} {
-    margin: 0;
-    padding: 1%;
-    font-size: 27px;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 27px;
+    }
   }
 }
 
@@ -223,15 +223,15 @@
 }
 .editExpression {
   @extend %traceButtons;
-}
-
-.editExpression:active {
-  @extend %activeProperties;
-  @media #{$desktop} {
-    margin: 6% 2% 0;
+  &:active {
+    @media #{$desktop} {
+      margin: 6% 2% 0;
+    }
   }
-  @media #{$tablet} {
-    margin: 6% 1% 0;
+  &:active {
+    @media #{$tablet} {
+      margin: 6% 1% 0;
+    }
   }
 }
 
