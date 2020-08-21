@@ -66,6 +66,7 @@ const actionCreators = {
     const response = await traceService.postTrace(expression);
     if (response.ok) {
       let answ = response.data.map(i => i.message);
+
       window.alert(answ);
       dispatch(privateActionCreators.saveExpressionSuccess(expression));
       dispatch(

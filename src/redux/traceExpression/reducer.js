@@ -13,7 +13,10 @@ export const defaultState = {
   deleteSomeExpressionError: null,
   changeExpression: '',
   changeExpressionLoading: false,
-  changeExpressionError: null
+  changeExpressionError: null,
+  deleteAll: '',
+  deleteAllLoading: false,
+  deleteAllError: null
 };
 
 const reducerDescription = {
