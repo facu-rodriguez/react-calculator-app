@@ -81,8 +81,7 @@ class AppContainer extends PureComponent {
         break;
       case '=':
         this.setState(prevState => {
-          if (isFinite(prevState.expression.slice(-1))) {
-            console.log(prevState.expression);
+          if (isFinite(prevState.expression.slice(-1)) && prevState.expression.slice(-1) !== ' ') {
             const resultado = eval(prevState.expression);
             const resultadoToString = resultado.toString();
             return { expression: resultadoToString };
