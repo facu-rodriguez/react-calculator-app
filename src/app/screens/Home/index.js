@@ -114,20 +114,21 @@ class Home extends PureComponent {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div>
         <Link className={styles.link} to="/Trace">
           Trace
         </Link>
-        <br></br>
         <Link className={styles.link} to="/Form">
           Encuesta
         </Link>
-        <div className={styles.containerCalculator}>
-          <div className={styles.input}>
-            <Input value={this.state.expression} handleClick={this.handleClick} />
-          </div>
-          <div className={styles.buttons}>
-            <ButonsConfig handleClick={this.handleClick} />
+        <div className={styles.container}>
+          <div className={styles.containerCalculator}>
+            <div className={styles.input}>
+              <Input value={this.state.expression} handleClick={this.handleClick} />
+            </div>
+            <div className={styles.buttons}>
+              <ButonsConfig handleClick={this.handleClick} />
+            </div>
           </div>
         </div>
       </div>
