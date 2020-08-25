@@ -118,6 +118,10 @@ class Home extends PureComponent {
         <Link className={styles.link} to="/Trace">
           Trace
         </Link>
+        <br></br>
+        <Link className={styles.link} to="/Form">
+          Encuesta
+        </Link>
         <div className={styles.containerCalculator}>
           <div className={styles.input}>
             <Input value={this.state.expression} handleClick={this.handleClick} />

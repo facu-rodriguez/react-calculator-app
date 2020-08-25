@@ -157,6 +157,10 @@ class ScreenTrace extends PureComponent {
         <Link className={styles.link} to="/">
           Home
         </Link>
+        <br></br>
+        <Link className={styles.link} to="/Form">
+          Encuesta
+        </Link>
         <div className={styles.containerTrace}>
           <Trace
             value={this.state.newExpression}
