@@ -5,7 +5,10 @@ import 'url-search-params-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from 'redux/store';
 import { StylesProvider } from '@material-ui/styles';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import './scss/index.scss';
 import './config/analytics';
@@ -19,8 +22,12 @@ import App from './app';
 unregister();
 
 ReactDOM.render(
-  <StylesProvider injectFirst>
-    <App />
-  </StylesProvider>,
+  <Router>
+    <StylesProvider injectFirst>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </StylesProvider>
+  </Router>,
   document.getElementById('root')
 );

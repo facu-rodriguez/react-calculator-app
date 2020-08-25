@@ -1,8 +1,7 @@
 import { create } from 'apisauce';
 
 const api = create({
-  baseURL: 'https://thesimpsonsquoteapi.glitch.me',
-  timeout: 30000
+  baseURL: 'https://private-0a08eb-apitest290.apiary-mock.com/training'
 });
 
 export default api;

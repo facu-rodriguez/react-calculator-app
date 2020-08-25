@@ -1,0 +1,240 @@
+@import 'scss/variables/_mediaQueries.scss';
+
+%boton {
+  @media #{$desktop}, #{$tablet} {
+    border-radius: 15px;
+    padding: 3% 0;
+    margin: 5% 5px 1%;
+    width: 20%;
+    border: transparent;
+    color: white;
+    font-size: 30px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
+  }
+  @media #{$mobile} {
+    width: 25%;
+    border: transparent;
+    color: white;
+    font-size: 30px;
+    outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
+  }
+}
+
+%traceButtons {
+  @extend %boton;
+  @media #{$desktop}, #{$tablet} {
+    opacity: 0.4;
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 15px;
+    width: 30%;
+    padding: 3% 0;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+      margin: 6% 5px 5%;
+    }
+  }
+  @media #{$mobile} {
+    opacity: 0.4;
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 16px;
+    width: 33.3%;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+      margin: 0;
+      font-size: 14px;
+    }
+  }
+}
+
+%botonesLargos {
+  @media #{$desktop}, #{$tablet} {
+    border-radius: 15px;
+    padding: 3% 0%;
+    border: transparent;
+    color: white;
+    font-size: 30px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.6);
+    outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
+  }
+  @media #{$mobile} {
+    border: transparent;
+    color: white;
+    font-size: 30px;
+    outline: none;
+    &:active {
+      box-shadow: 0px 0px;
+      border: transparent;
+    }
+  }
+}
+
+.save {
+  @extend %boton;
+  @media #{$desktop} , #{$tablet} {
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 20px;
+    margin: 4% 0 5%;
+    &:active {
+      margin: 5% 0;
+    }
+  }
+  @media #{$mobile} {
+    background-color: rgba(96, 133, 235, 0.8);
+    font-size: 30px;
+    padding: 0;
+    margin: 0 0 2px;
+    &:active {
+      font-size: 28px;
+      margin: 0 0;
+      padding: 1%;
+    }
+  }
+}
+
+.deleteAll {
+  @extend %botonesLargos;
+  @media #{$desktop}, #{$tablet} {
+    width: 35%;
+    background-color: #ff8200;
+    margin: 5px 5% 5px 5%;
+    float: right;
+    &:active {
+      margin: 6px 5% 0px 5%;
+    }
+  }
+  @media #{$mobile} {
+    width: 40%;
+    background-color: #ff8200;
+    float: right;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 20px;
+    }
+  }
+}
+
+.delete {
+  @extend %botonesLargos;
+  @media #{$desktop}, #{$tablet} {
+    width: 25%;
+    background-color: #ff8200;
+    margin: 5px 0px 5px 0px;
+    float: right;
+    &:active {
+      margin: 7px 0px 3px 0px;
+    }
+  }
+  @media #{$mobile} {
+    width: 35%;
+    background-color: #ff8200;
+    float: right;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 20px;
+    }
+  }
+}
+.number {
+  @extend %boton;
+  background-color: orange;
+  &:active {
+    margin: 5.5% 5px 1%;
+  }
+  @media #{$mobile} {
+    &:active {
+      margin: 0;
+      font-size: 27px;
+    }
+  }
+}
+
+.operador {
+  @extend %boton;
+  background-color: #989694;
+  float: right;
+  &:active {
+    margin: 5.5% 5px 0px;
+  }
+  @media #{$mobile} {
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 20px;
+    }
+  }
+}
+
+.cero {
+  @extend %botonesLargos;
+  @media #{$desktop}, #{$tablet} {
+    width: 35%;
+    margin: 5% 10% 5% 0%;
+    background-color: orange;
+  }
+  @media #{$mobile} {
+    width: 50%;
+    background-color: orange;
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 27px;
+    }
+  }
+}
+
+.igual {
+  @extend %boton;
+  background-color: rgba(150, 191, 50, 1);
+  &:active {
+    margin: 5.5% 5px 0%;
+  }
+  @media #{$mobile} {
+    &:active {
+      margin: 0;
+      padding: 1%;
+      font-size: 27px;
+    }
+  }
+}
+
+.deleteAllTrace {
+  @extend %traceButtons;
+}
+
+.deleteSomeTrace {
+  @extend %traceButtons;
+}
+.editExpression {
+  @extend %traceButtons;
+  &:active {
+    @media #{$desktop} {
+      margin: 6% 2% 0;
+    }
+  }
+  &:active {
+    @media #{$tablet} {
+      margin: 6% 1% 0;
+    }
+  }
+}
+
+.activeButtons {
+  opacity: 1;
+}
