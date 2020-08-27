@@ -153,23 +153,28 @@ class ScreenTrace extends PureComponent {
   };
   render() {
     return (
-      <div className={styles.container}>
+      <div>
         <Link className={styles.link} to="/">
           Home
         </Link>
-        <div className={styles.containerTrace}>
-          <Trace
-            value={this.state.newExpression}
-            handleClickNewExpression={this.handleClickNewExpression}
-            handleClickTrace={this.handleClickTrace}
-          />
-        </div>
-        <div className={styles.containerCalculator}>
-          <div className={styles.input}>
-            <Input value={this.state.expression} handleClick={this.handleClick} />
+        <Link className={styles.link} to="/Form">
+          Encuesta
+        </Link>
+        <div className={styles.container}>
+          <div className={styles.containerTrace}>
+            <Trace
+              value={this.state.newExpression}
+              handleClickNewExpression={this.handleClickNewExpression}
+              handleClickTrace={this.handleClickTrace}
+            />
           </div>
-          <div className={styles.buttons}>
-            <ButonsConfig handleClick={this.handleClick} />
+          <div className={styles.containerCalculator}>
+            <div className={styles.input}>
+              <Input value={this.state.expression} handleClick={this.handleClick} />
+            </div>
+            <div className={styles.buttons}>
+              <ButonsConfig handleClick={this.handleClick} />
+            </div>
           </div>
         </div>
       </div>

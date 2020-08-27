@@ -1,11 +1,10 @@
 @import 'scss/variables/_mediaQueries.scss';
 
 .link {
-  position: absolute;
   top: 0%;
-  left: 2%;
   font-size: 20px;
   color: black;
+  margin: 0 1%;
 }
 
 .link:hover {

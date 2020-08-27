@@ -1,7 +1,6 @@
 import { createTypes, completeTypes } from 'redux-recompose';
 
 import traceService from 'services/traceService';
-
 import {
   TYPE_ADD_EXPRESSION,
   TYPE_DELETE_EXPRESSION,

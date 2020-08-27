@@ -1,7 +1,13 @@
 .traceElement {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   color: white;
-}
-
-.traceElement:active {
-  color: red;
+  border: none;
+  background: none;
+  appearance: none;
+  border-bottom: 1px solid black;
+  &:focus {
+    background-color: rgba(96, 133, 235, 0.8);
+  }
 }

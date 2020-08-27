@@ -9,9 +9,9 @@ class TraceExpression extends PureComponent {
 
   render() {
     return (
-      <p onClick={this.handleValueClick} className={styles.traceElement}>
+      <button onClick={this.handleValueClick} className={styles.traceElement}>
         {this.props.expression}
-      </p>
+      </button>
     );
   }
 }

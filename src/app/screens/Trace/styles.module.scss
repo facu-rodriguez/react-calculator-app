@@ -1,11 +1,10 @@
 @import 'scss/variables/_mediaQueries.scss';
 
 .link {
-  position: absolute;
   top: 0%;
-  left: 2%;
   font-size: 20px;
   color: black;
+  margin: 0 1%;
 }
 
 .link:hover {
@@ -25,6 +24,7 @@
 
 .containerTrace {
   @media #{$desktop}, #{$tablet} {
+    height: 92vh;
     background-color: rgba(200, 200, 200, 1);
     border-radius: 25px;
     color: white;
@@ -34,6 +34,7 @@
     justify-content: center;
   }
   @media #{$mobile} {
+    height: 42vh;
     background-color: rgba(200, 200, 200, 1);
     border-radius: 25px;
     color: white;

@@ -2,8 +2,11 @@
 
 .traceContainer {
   @media #{$desktop}, #{$desktop-tablet} {
+    height: 100%;
+    width: 80%;
   }
   @media #{$mobile} {
+    height: 100%;
     width: 70%;
   }
 }
@@ -12,21 +15,29 @@
   @media #{$desktop}, #{$desktop-tablet} {
     margin: 0;
     padding: 3% 0;
+    text-align: center;
   }
   @media #{$mobile} {
     margin: 0;
     font-size: 20px;
+    text-align: center;
   }
 }
 
 .traceElementContainer {
   @media #{$desktop}, #{$desktop-tablet} {
+    height: 85%;
     background-color: rgba(150, 150, 150, 1);
+    overflow: auto;
+    text-align: center;
+    padding: 3% 0 0;
   }
   @media #{$mobile} {
+    height: 85%;
     background-color: rgba(150, 150, 150, 1);
     border-radius: 15px;
     text-align: center;
+    overflow: auto;
   }
 }
 
@@ -36,10 +47,4 @@
   @media #{$mobile} {
     width: 85%;
   }
-}
-
-.traceElement {
-  display: flex;
-  justify-content: center;
-  color: white;
 }
